@@ -3,13 +3,19 @@ type CartItem = {
     price: number;
 }
 
+type OrderStatus = 'open' | 'closed'
+
 
 export class ShoppingCart {
     private readonly _items: CartItem[] = []
-    private orderStatus: 'open' | 'closed' = "open"
+    private _orderStatus: OrderStatus = "open"
 
     get items(): Readonly<CartItem[]> {
         return this._items
+    }
+
+    get orderStatus(): OrderStatus {
+        return this._orderStatus
     }
 
     addItem(item: CartItem): void {
@@ -24,14 +30,14 @@ export class ShoppingCart {
         return +this._items.reduce((acc, val) => acc + val.price, 0).toFixed(2)
     }
 
-    checkou() {
+    checkout() {
         if (this.isEmpty()) {
             console.log('Seu carrinho está vazio.')
             return
         }
 
-        this.orderStatus = "closed"
-        this.sendMessage('Seu pedido foi recebido.')
+        this._orderStatus = "closed"
+        this.sendMessage(`Seu pedido com total de ${this.total()} recebido.`)
         this.saveOrder()
         this.clear()
     }
@@ -49,16 +55,27 @@ export class ShoppingCart {
     }
 
     clear() {
+        console.log('Carrinho de compras foi limpo.')
         this._items.length = 0;
     }
 }
 
 const shoppingCart = new ShoppingCart()
-shoppingCart.addItem({ name: "Camisa", price: 45.362 })
-shoppingCart.addItem({ name: "Calça", price: 55.99 })
-shoppingCart.addItem({ name: "Short", price: 35.853 })
+shoppingCart.addItem({ name: "Camisa", price: 49.362 })
+shoppingCart.addItem({ name: "Calça", price: 56.99 })
+shoppingCart.addItem({ name: "Short", price: 32.853 })
+shoppingCart.addItem({ name: "Boné", price: 17.125 })
 
-// shoppingCart.removeItem(1)
+shoppingCart.removeItem(3)
+
+console.log(shoppingCart.orderStatus)
+console.log(shoppingCart.items)
+console.log(shoppingCart.total())
+shoppingCart.checkout()
 
 console.log(shoppingCart.items)
 console.log(shoppingCart.total())
+console.log(shoppingCart.orderStatus)
+
+
+
