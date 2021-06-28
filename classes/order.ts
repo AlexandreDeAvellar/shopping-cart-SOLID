@@ -21,9 +21,9 @@ export class Order {
             console.log('Seu carrinho está vazio.')
         }
 
-        console.log('ORDER:', this.cart.items)
+        // console.log('ORDER:', this.cart.items)
         this._orderStatus = "closed"
-        this.message.sendMessage(`Seu pedido com total de ${this.cart.total()} recebido.`)
+        this.message.sendMessage(`Seu pedido com total de ${this.cart.totalWithDiscount()} recebido.`)
         this.persistency.saveOrder()
         this.cart.clear()
     }
