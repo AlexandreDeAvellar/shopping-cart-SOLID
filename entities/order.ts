@@ -1,7 +1,7 @@
-import { Messaging } from "./messaging";
-import { Persistency } from "./persistency";
+import { Messaging } from "../services/messaging";
+import { Persistency } from "../services/persistency";
 import { ShoppingCart } from "./shopping-cart";
-import { OrderStatus } from "./types/OrderStatus";
+import { OrderStatus } from "./interfaces/OrderStatus";
 
 
 export class Order {
