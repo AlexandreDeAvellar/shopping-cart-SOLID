@@ -1,10 +1,5 @@
-type CartItem = {
-    name: string;
-    price: number;
-}
-
-type OrderStatus = 'open' | 'closed'
-
+import { CartItem } from "./types/CartItem"
+import { OrderStatus } from "./types/OrderStatus"
 
 export class ShoppingCart {
     private readonly _items: CartItem[] = []
