@@ -2,6 +2,7 @@ import { Messaging } from "../services/messaging";
 import { Persistency } from "../services/persistency";
 import { ShoppingCart } from "./shopping-cart";
 import { OrderStatus } from "./interfaces/OrderStatus";
+import { CustomerOrder } from "./interfaces/ICustomer";
 
 
 export class Order {
@@ -9,7 +10,8 @@ export class Order {
     constructor(
         private readonly cart: ShoppingCart,
         private readonly message: Messaging,
-        private readonly persistency: Persistency
+        private readonly persistency: Persistency,
+        private readonly customer: CustomerOrder
     ) { }
 
     get orderStatus(): OrderStatus {
@@ -23,7 +25,8 @@ export class Order {
 
         // console.log('ORDER:', this.cart.items)
         this._orderStatus = "closed"
-        this.message.sendMessage(`Seu pedido com total de ${this.cart.totalWithDiscount()} recebido.`)
+        this.message.sendMessage(`Olá ${this.customer.getName()}, seu pedido com total de ${this.cart.totalWithDiscount()} já foi recebido.
+            Será gerado nota fiscal no registro ${this.customer.getIDN()}`)
         this.persistency.saveOrder()
         this.cart.clear()
     }
