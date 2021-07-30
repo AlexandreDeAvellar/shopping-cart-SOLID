@@ -2,6 +2,7 @@ node_modules
 .vscode
 shopping-cart-JS.js
 
+
 # Logs
 logs
 *.log
